@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import MainPage from '../../pages/MainPage/MainPage';
+import MainPage from '../../pages/MainPage/mainPage';
 
 type AppProps = {
   title: string;
