@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/App/App';
+import App from './components/app/app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +11,7 @@ root.render(
     <App
       title={'The Grand Budapest Hotel'}
       genre={'Drama'}
-      year={'2014'}
+      year={'20141'}
     />
   </React.StrictMode>
 );
