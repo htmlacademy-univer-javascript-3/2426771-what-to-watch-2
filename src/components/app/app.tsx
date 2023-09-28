@@ -1,5 +1,6 @@
 import {FC} from 'react';
-import MainPage from '../../pages/main-page/main-page';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { getRouteConfig } from '../../config/route';
 
 type AppProps = {
   title: string;
@@ -8,11 +9,17 @@ type AppProps = {
 }
 
 const App: FC<AppProps> = ({title, genre, year}) => (
-  <MainPage
-    title={title}
-    genre={genre}
-    year={year}
-  />
+  <BrowserRouter>
+    <Routes>
+      {Object.values(getRouteConfig({title, genre, year})).map(({ element, path }) => (
+        <Route
+          key={path}
+          path={path}
+          element={element}
+        />
+      ))}
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;
