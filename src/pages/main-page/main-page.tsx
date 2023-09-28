@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import FilmCard from '../../components/FilmCard/FilmCard';
+import FilmCard from '../../components/film-card/film-card';
 
 type MainPageProps = {
   title: string;
