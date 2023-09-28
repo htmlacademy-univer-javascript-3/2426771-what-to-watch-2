@@ -7,6 +7,7 @@ type LimitedRouteProps = {
     children: React.ReactNode;
 }
 
-const LimitedRoute: FC<LimitedRouteProps> = ({redirectCondition, redirectTo, children}) => redirectCondition ? <Navigate to={redirectTo}/> : (children);
+// eslint-disable-next-line react/jsx-no-useless-fragment
+const LimitedRoute: FC<LimitedRouteProps> = ({redirectCondition, redirectTo, children}) => redirectCondition ? <Navigate to={redirectTo}/> : <>{children}</>;
 
 export default LimitedRoute;
