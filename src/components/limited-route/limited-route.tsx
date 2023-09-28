@@ -7,12 +7,6 @@ type LimitedRouteProps = {
     children: React.ReactNode;
 }
 
-const LimitedRoute: FC<LimitedRouteProps> = ({redirectCondition, redirectTo, children}) => {
-  if (redirectCondition) {
-    return <Navigate to={redirectTo}/>;
-  } else {
-    return children;
-  }
-};
+const LimitedRoute: FC<LimitedRouteProps> = ({redirectCondition, redirectTo, children}) => redirectCondition ? <Navigate to={redirectTo}/> : (children);
 
 export default LimitedRoute;
