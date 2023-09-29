@@ -1,10 +1,10 @@
-import {FC, ReactNode} from 'react';
+import {FC, ReactElement } from 'react';
 import LimitedRoute from '../limited-route/limited-route';
 import { AuthorizationStatus } from '../../types/authorization';
 import { RoutePaths } from '../../config/route';
 
 type LoginOnlyRouteProps = {
-  children: ReactNode;
+  children: ReactElement;
 }
 
 const LoginOnlyRoute: FC<LoginOnlyRouteProps> = ({children}) => {

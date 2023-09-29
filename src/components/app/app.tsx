@@ -11,11 +11,11 @@ type AppProps = {
 const App: FC<AppProps> = ({title, genre, year}) => (
   <BrowserRouter>
     <Routes>
-      {Object.values(getRouteConfig({title, genre, year})).map(({ element, path }) => (
+      {Object.entries(getRouteConfig({title, genre, year})).map(([path, routeProps]) => (
         <Route
           key={path}
           path={path}
-          element={element}
+          {...routeProps}
         />
       ))}
     </Routes>
