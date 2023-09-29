@@ -11,7 +11,7 @@ root.render(
     <App
       title={'The Grand Budapest Hotel'}
       genre={'Drama'}
-      year={'20141'}
+      year={'2014'}
     />
   </React.StrictMode>
 );
