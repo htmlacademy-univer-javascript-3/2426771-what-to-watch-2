@@ -146,7 +146,7 @@ const FilmPage: FC = () => {
         </footer>
       </div>
     </div>
-  )
+  );
 };
 
 export default FilmPage;

@@ -31,7 +31,7 @@ const Rating: FC<RatingProps> = ({setRating}) => {
         ))}
       </div>
     </div>
-  )
+  );
 };
 
 export default Rating;

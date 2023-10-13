@@ -3,8 +3,7 @@ import Rating from '../rating/rating';
 
 const CommentForm: FC = () => {
   const [reviewText, setReviewText] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [rating, setRating] = useState(0);
+  const [, setRating] = useState(0);
 
   return (
     <form action="#" className="add-review__form">
