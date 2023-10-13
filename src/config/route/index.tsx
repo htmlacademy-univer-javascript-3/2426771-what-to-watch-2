@@ -7,6 +7,7 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginOnlyRoute from '../../components/login-only-route/login-only-route';
+import { Film as FilmType, FilmCards } from '../../types/film';
 
 export enum RoutePaths {
   Main = '/',
@@ -22,11 +23,25 @@ type RouteConfigProps = {
   title: string;
   genre: string;
   year: string;
+  filmCards: FilmCards;
+  videoLink: string;
+  film: FilmType;
 }
+
+export const getRoutePath = (routePath: RoutePaths, props: Record<string, string>) => {
+  switch (routePath) {
+    case RoutePaths.Film:
+      return routePath.replace(':id', props['id']);
+    case RoutePaths.AddReview:
+      return routePath.replace(':id', props['id']);
+    default:
+      return routePath;
+  }
+};
 
 export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, RouteProps> => ({
   [RoutePaths.Main]: {
-    element: <MainPage title={props.title} genre={props.genre} year={props.year}/>
+    element: <MainPage title={props.title} genre={props.genre} year={props.year} filmCards={props.filmCards}/>
   },
   [RoutePaths.SignIn]: {
     element: <SignInPage/>
@@ -34,7 +49,7 @@ export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, Rout
   [RoutePaths.MyList]: {
     element: (
       <LoginOnlyRoute>
-        <MyListPage/>
+        <MyListPage filmCards={props.filmCards}/>
       </LoginOnlyRoute>
     )
   },
@@ -42,10 +57,10 @@ export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, Rout
     element: <FilmPage/>
   },
   [RoutePaths.AddReview]: {
-    element: <AddReviewPage/>
+    element: <AddReviewPage film={props.film}/>
   },
   [RoutePaths.Player]: {
-    element: <PlayerPage/>
+    element: <PlayerPage videoLink={props.videoLink}/>
   },
   [RoutePaths.Page404]: {
     element: <NotFoundPage/>

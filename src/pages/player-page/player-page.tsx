@@ -1,8 +1,12 @@
 import {FC} from 'react';
 
-const PlayerPage: FC = () => (
+interface PlayerPageProps {
+  videoLink: string;
+}
+
+const PlayerPage: FC<PlayerPageProps> = ({videoLink}) => (
   <div className="player">
-    <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+    <video src="#" className="player__video" poster={videoLink}></video>
 
     <button type="button" className="player__exit">Exit</button>
 

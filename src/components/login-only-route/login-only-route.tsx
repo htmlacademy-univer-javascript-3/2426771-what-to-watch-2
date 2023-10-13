@@ -8,7 +8,7 @@ type LoginOnlyRouteProps = {
 }
 
 const LoginOnlyRoute: FC<LoginOnlyRouteProps> = ({children}) => {
-  const loginState = AuthorizationStatus.NoAuth as AuthorizationStatus;
+  const loginState = AuthorizationStatus.Auth as AuthorizationStatus;
   const isAuth = loginState === AuthorizationStatus.Auth;
 
   return (
