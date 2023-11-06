@@ -2,6 +2,7 @@ import {FC} from 'react';
 import { Link } from 'react-router-dom';
 import { RoutePaths, getRoutePath } from '../../config/route';
 import { FilmCard as FilmCardType } from '../../types/film';
+import { VideoPreview } from '../video-preview/video-preview';
 
 type FilmCardProps = {
   filmCard: FilmCardType;
@@ -15,11 +16,16 @@ const FilmCard: FC<FilmCardProps> = ({filmCard, setActiveCard, active}) => (
     onMouseOver={() => setActiveCard(filmCard.id)}
     onMouseOut={() => setActiveCard(null)}
   >
-    <div className="small-film-card__image">
-      <img src={`img/${filmCard.previewImage}`} alt={filmCard.name} width="280" height="175"/>
-    </div>
+    <VideoPreview
+      className="small-film-card__image"
+      isActive={active}
+      previewImage={`img/${filmCard.previewImage}`}
+      videoLink={filmCard.previewVideoLink}
+      alt={filmCard.name}
+      videoTimeout={1000}
+    />
     <h3 className="small-film-card__title">
-      <Link className="small-film-card__link" to={getRoutePath(RoutePaths.Film, {id: filmCard.id})} style={active ? {backgroundColor: 'red'} : {}}>{filmCard.name}</Link>
+      <Link className="small-film-card__link" to={getRoutePath(RoutePaths.Film, {id: filmCard.id})}>{filmCard.name}</Link>
     </h3>
   </article>
 );
