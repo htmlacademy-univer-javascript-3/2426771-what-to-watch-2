@@ -16,7 +16,8 @@ export enum RoutePaths {
   Film = '/films/:id',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
-  Page404 = '*'
+  Page404 = '/404',
+  Page404Auto = '*'
 }
 
 type RouteConfigProps = {
@@ -63,6 +64,9 @@ export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, Rout
     element: <PlayerPage videoLink={props.videoLink}/>
   },
   [RoutePaths.Page404]: {
+    element: <NotFoundPage/>
+  },
+  [RoutePaths.Page404Auto]: {
     element: <NotFoundPage/>
   }
 });
