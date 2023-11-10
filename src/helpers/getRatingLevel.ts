@@ -1,13 +1,15 @@
+import { RatingLevel } from '../types/rating-level';
+
 export function getRatingLevel(rating: number) {
   if (rating === 10) {
-    return 'Awesome';
+    return RatingLevel.Awesome;
   } else if (rating > 8) {
-    return 'Very Good';
+    return RatingLevel.VeryGood;
   } else if (rating > 5) {
-    return 'Good';
+    return RatingLevel.Good;
   }else if (rating > 3) {
-    return 'Normal';
+    return RatingLevel.Normal;
   } else {
-    return 'Bad';
+    return RatingLevel.Bad;
   }
 }
