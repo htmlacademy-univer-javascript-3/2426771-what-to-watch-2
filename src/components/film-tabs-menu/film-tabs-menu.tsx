@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import { FilmTabs } from '../../types/film-tab/index';
 import { Link } from 'react-router-dom';
-import { useHash } from '../../hooks/useHash';
+import { useHash } from '../../hooks/use-hash';
 
 type Tab = {
   key: FilmTabs;

@@ -14,7 +14,7 @@ export const ReviewCard: FC<Props> = ({review}) => (
 
       <footer className="review__details">
         <cite className="review__author">{review.username}</cite>
-        <time className="review__date" dateTime="2015-11-18">{review.date}</time>
+        <time className="review__date" dateTime={review.date}>{review.date}</time>
       </footer>
     </blockquote>
 

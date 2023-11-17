@@ -6,49 +6,49 @@ export const filmCards: FilmCards = [
     name: 'Звездные войны: Эпизод 9',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Фантастика',
+    genre: 'Fantastic',
   }, {
     id: '2',
     name: 'Мстители: Финал',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Боевик',
+    genre: 'Action',
   }, {
     id: '3',
     name: 'Оно',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Ужастик',
+    genre: 'Horror',
   }, {
     id: '4',
     name: 'Гарри Поттер и Проклятое дитя',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Фэнтези',
+    genre: 'Fantasy',
   }, {
     id: '5',
     name: 'Зеленая книга',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Биография',
+    genre: 'Biography',
   }, {
     id: '6',
     name: 'Темный рыцарь',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Триллер',
+    genre: 'Thriller',
   }, {
     id: '7',
     name: 'Богемская рапсодия',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Драма',
+    genre: 'Drama',
   }, {
     id: '8',
     name: 'Джокер',
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
-    genre: 'Криминал',
+    genre: 'Crime',
   }
 ];
 

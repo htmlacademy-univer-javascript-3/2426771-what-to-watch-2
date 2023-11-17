@@ -22,7 +22,6 @@ export enum RoutePaths {
 
 type RouteConfigProps = {
   title: string;
-  genre: string;
   year: string;
   filmCards: FilmCards;
   videoLink: string;
@@ -42,7 +41,7 @@ export const getRoutePath = (routePath: RoutePaths, props: Record<string, string
 
 export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, RouteProps> => ({
   [RoutePaths.Main]: {
-    element: <MainPage title={props.title} genre={props.genre} year={props.year} filmCards={props.filmCards}/>
+    element: <MainPage title={props.title} year={props.year}/>
   },
   [RoutePaths.SignIn]: {
     element: <SignInPage/>

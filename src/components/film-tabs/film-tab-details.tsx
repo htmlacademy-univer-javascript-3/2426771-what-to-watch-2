@@ -19,11 +19,15 @@ const FilmTabDetails: FC<Props> = ({director, starring, runTime, genre, released
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Starring</strong>
         <span className="film-card__details-value">
-          {starring.map((s, i) => (
-            <React.Fragment key={Math.random()}>
-              {s}, {i === starring.length - 1 && <br/>}
-            </React.Fragment>
-          ))}
+          {starring.map((s, index) => {
+            const i = index;
+
+            return (
+              <React.Fragment key={i}>
+                {s}, {i === starring.length - 1 && <br/>}
+              </React.Fragment>
+            );
+          })}
         </span>
       </p>
     </div>
