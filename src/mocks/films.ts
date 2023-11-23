@@ -49,6 +49,24 @@ export const filmCards: FilmCards = [
     previewImage: 'bohemian-rhapsody.jpg',
     previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
     genre: 'Crime',
+  }, {
+    id: '9',
+    name: 'Темный рыцарь',
+    previewImage: 'bohemian-rhapsody.jpg',
+    previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
+    genre: 'Thriller',
+  }, {
+    id: '10',
+    name: 'Богемская рапсодия',
+    previewImage: 'bohemian-rhapsody.jpg',
+    previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
+    genre: 'Drama',
+  }, {
+    id: '11',
+    name: 'Джокер',
+    previewImage: 'bohemian-rhapsody.jpg',
+    previewVideoLink: 'https://www.shutterstock.com/shutterstock/videos/1072000261/preview/stock-footage-empty-green-screen-display-laptop-for-watching-and-paste-background-e-business-blog-or-gaming-app.webm',
+    genre: 'Crime',
   }
 ];
 

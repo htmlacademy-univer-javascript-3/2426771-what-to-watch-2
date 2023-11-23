@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
@@ -15,6 +15,9 @@ type MainPageProps = {
 const MainPage: FC<MainPageProps> = ({title, year}) => {
   const genre = useAppSelector(getGenre);
   const filmCards = useAppSelector(getFilmCards);
+  const [limit, setLimit] = useState(8);
+
+  const genres = useMemo(() => Array.from(new Set(filmCards.map((f) => f.genre))), [filmCards]);
 
   const filteredFilmCards = useMemo(() => {
     if (!genre) {
@@ -22,7 +25,12 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
     }
     return filmCards.filter((f) => f.genre === genre);
   }, [filmCards, genre]);
-  const genres = useMemo(() => Array.from(new Set(filmCards.map((f) => f.genre))), [filmCards]);
+
+  const filteredFilmCardsWithLimit = useMemo(() => filteredFilmCards.slice(0, limit), [filteredFilmCards, limit]);
+
+  const handleMoreClick = () => {
+    setLimit((l) => l + 8);
+  };
 
   return (
     <div>
@@ -73,11 +81,19 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList genres={genres}/>
-          <FilmList filmCards={filteredFilmCards} />
+          <FilmList filmCards={filteredFilmCardsWithLimit} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {limit < filteredFilmCards.length && (
+            <div className="catalog__more">
+              <button
+                className="catalog__button"
+                type="button"
+                onClick={handleMoreClick}
+              >
+                Show more
+              </button>
+            </div>
+          )}
         </section>
 
         <footer className="page-footer">
