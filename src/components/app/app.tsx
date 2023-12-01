@@ -23,7 +23,7 @@ const App: FC<AppProps> = ({title, year, videoLink}) => {
   }, []);
 
   if (!isLoadingComplete(loadingStatus)) {
-    return 'Спиннер :)';
+    return <div>Спиннер</div>;
   }
 
   return (
