@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useHash } from '../../hooks/use-hash';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { genreChanged } from '../../store/reducer';
+import { genreChanged } from '../../store/reducers/filters';
 
 interface Props {
   genres: string[];
@@ -20,7 +20,7 @@ export const GenresList: FC<Props> = ({ genres }) => {
   const allGenres: Genre[] = [
     {
       genre: 'All genres',
-      href: undefined,
+      href: '',
     },
     ...genres.map((g) => ({ genre: g, href: g })),
   ];
@@ -33,7 +33,7 @@ export const GenresList: FC<Props> = ({ genres }) => {
     <ul className="catalog__genres-list">
       {allGenres.map((genre) => (
         <li
-          key={genre.href}
+          key={genre.genre}
           className={[
             'catalog__genres-item',
             hash === genre.href ? 'catalog__genres-item--active' : undefined,

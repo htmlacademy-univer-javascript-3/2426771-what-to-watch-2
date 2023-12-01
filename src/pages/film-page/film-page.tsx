@@ -3,7 +3,6 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { RoutePaths, getRoutePath } from '../../config/route';
 import Header from '../../components/header/header';
 import FilmTabsMenu from '../../components/film-tabs-menu/film-tabs-menu';
-import { fetchFilm, filmCards } from '../../mocks/films';
 import { Film } from '../../types/film/index';
 import { useHash } from '../../hooks/use-hash';
 import FilmTabs from '../../components/film-tabs/film-tabs';
@@ -22,13 +21,13 @@ const FilmPage: FC = () => {
       return navigate(RoutePaths.Page404);
     }
 
-    const resFilm = fetchFilm(id);
+    // const resFilm = fetchFilm(id);
 
-    if (!resFilm) {
-      return navigate(RoutePaths.Page404);
-    }
+    // if (!resFilm) {
+    //   return navigate(RoutePaths.Page404);
+    // }
 
-    setFilm(resFilm);
+    // setFilm(resFilm);
   }, [id, navigate]);
 
   if (!hash) {
@@ -108,7 +107,7 @@ const FilmPage: FC = () => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmList filmCards={filmCards.slice(0, 4)} />
+          {/* <FilmList filmCards={filmCards.slice(0, 4)} /> */}
         </section>
 
         <footer className="page-footer">
