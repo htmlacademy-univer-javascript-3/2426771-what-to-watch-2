@@ -1,13 +1,8 @@
 import {FC} from 'react';
-import { FilmCards } from '../../types/film';
 import FilmList from '../../components/film-list/film-list';
 import Header from '../../components/header/header';
 
-interface MyListPageProps {
-  filmCards: FilmCards;
-}
-
-const MyListPage: FC<MyListPageProps> = ({filmCards}) => (
+const MyListPage: FC = () => (
   <div className="user-page">
     <Header>
       <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>

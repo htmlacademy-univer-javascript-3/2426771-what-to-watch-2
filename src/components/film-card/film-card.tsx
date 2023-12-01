@@ -19,7 +19,7 @@ const FilmCard: FC<FilmCardProps> = ({filmCard, setActiveCard, active}) => (
     <VideoPreview
       className="small-film-card__image"
       isActive={active}
-      previewImage={`img/${filmCard.previewImage}`}
+      previewImage={filmCard.previewImage}
       videoLink={filmCard.previewVideoLink}
       alt={filmCard.name}
       videoTimeout={1000}

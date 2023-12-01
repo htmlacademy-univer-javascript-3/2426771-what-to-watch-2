@@ -1,15 +1,10 @@
 import {FC} from 'react';
-import { Film } from '../../types/film';
 import Header from '../../components/header/header';
 import { RoutePaths, getRoutePath } from '../../config/route';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import CommentForm from '../../components/comment-form/comment-form';
 
-type AddReviewPageProps = {
-  film: Film;
-}
-
-const AddReviewPage: FC<AddReviewPageProps> = ({film: {name, id}}) => (
+const AddReviewPage: FC = () => (
   <section className="film-card film-card--full">
     <div className="film-card__header">
       <div className="film-card__bg">

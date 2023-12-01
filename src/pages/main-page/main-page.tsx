@@ -1,21 +1,24 @@
 import { FC, useMemo, useState } from 'react';
-import FilmList from '../../components/film-list/film-list';
 import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
 import Header from '../../components/header/header';
 import { GenresList } from '../../components/genres-list/genres-list';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFilmCards, getGenre } from '../../store/reducer';
+import { getFilms } from '../../store/reducers/films';
+import { getGenre } from '../../store/reducers/filters';
+import FilmList from '../../components/film-list/film-list';
 
 type MainPageProps = {
   title: string;
   year: string;
 }
 
+const LIMIT_STEP = 8;
+
 const MainPage: FC<MainPageProps> = ({title, year}) => {
   const genre = useAppSelector(getGenre);
-  const filmCards = useAppSelector(getFilmCards);
-  const [limit, setLimit] = useState(8);
+  const filmCards = useAppSelector(getFilms);
+  const [limit, setLimit] = useState(LIMIT_STEP);
 
   const genres = useMemo(() => Array.from(new Set(filmCards.map((f) => f.genre))), [filmCards]);
 
@@ -29,7 +32,7 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
   const filteredFilmCardsWithLimit = useMemo(() => filteredFilmCards.slice(0, limit), [filteredFilmCards, limit]);
 
   const handleMoreClick = () => {
-    setLimit((l) => l + 8);
+    setLimit((l) => l + LIMIT_STEP);
   };
 
   return (

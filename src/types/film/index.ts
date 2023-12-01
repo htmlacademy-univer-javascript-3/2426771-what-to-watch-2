@@ -23,5 +23,3 @@ export type Film = {
     released: number;
     isFavorite: boolean;
 }
-
-export type FilmCards = FilmCard[]

@@ -7,7 +7,6 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginOnlyRoute from '../../components/login-only-route/login-only-route';
-import { Film as FilmType, FilmCards } from '../../types/film';
 
 export enum RoutePaths {
   Main = '/',
@@ -23,9 +22,7 @@ export enum RoutePaths {
 type RouteConfigProps = {
   title: string;
   year: string;
-  filmCards: FilmCards;
   videoLink: string;
-  film: FilmType;
 }
 
 export const getRoutePath = (routePath: RoutePaths, props: Record<string, string>) => {
@@ -49,7 +46,7 @@ export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, Rout
   [RoutePaths.MyList]: {
     element: (
       <LoginOnlyRoute>
-        <MyListPage filmCards={props.filmCards}/>
+        <MyListPage />
       </LoginOnlyRoute>
     )
   },
@@ -57,7 +54,7 @@ export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, Rout
     element: <FilmPage/>
   },
   [RoutePaths.AddReview]: {
-    element: <AddReviewPage film={props.film}/>
+    element: <AddReviewPage />
   },
   [RoutePaths.Player]: {
     element: <PlayerPage videoLink={props.videoLink}/>

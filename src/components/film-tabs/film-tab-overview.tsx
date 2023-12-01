@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import { getRatingLevel } from '../../helpers/getRatingLevel';
+import { getRatingLevel } from '../../helpers/get-rating-level';
 
 interface Props {
   description: string;

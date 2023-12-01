@@ -1,7 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import { Review } from '../../types/review';
 import { ReviewCard } from '../review/review';
-import { fetchReviews } from '../../mocks/reviews';
 
 interface Props {
   filmId: string;
@@ -14,8 +13,8 @@ export const FilmTabReviews: FC<Props> = ({filmId}) => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   const onLoad = async () => {
-    const reviewsRes = await fetchReviews(filmId);
-    setReviews(reviewsRes);
+    // const reviewsRes = await fetchReviews(filmId);
+    // setReviews(reviewsRes);
   };
 
   useEffect(() => {
