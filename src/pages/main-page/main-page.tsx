@@ -1,12 +1,15 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
 import Header from '../../components/header/header';
 import { GenresList } from '../../components/genres-list/genres-list';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFilms } from '../../store/reducers/films';
-import { getGenre } from '../../store/reducers/filters';
+import { getFilms, getFilmsLoadingStatus } from '../../store/reducers/films';
 import FilmList from '../../components/film-list/film-list';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { isLoadingComplete } from '../../helpers/loading';
+import { fetchFilms } from '../../store/api-actions';
+import { useFilteredFilmCardsWithLimit } from '../../hooks/use-filtered-film-cards-with-limit';
 
 type MainPageProps = {
   title: string;
@@ -16,24 +19,22 @@ type MainPageProps = {
 const LIMIT_STEP = 8;
 
 const MainPage: FC<MainPageProps> = ({title, year}) => {
-  const genre = useAppSelector(getGenre);
+  const dispatch = useAppDispatch();
+
   const filmCards = useAppSelector(getFilms);
+  const loadingStatus = useAppSelector(getFilmsLoadingStatus);
   const [limit, setLimit] = useState(LIMIT_STEP);
+  const {genre, genres, fullLength, filteredFilmCardsWithLimit} = useFilteredFilmCardsWithLimit(filmCards, limit);
 
-  const genres = useMemo(() => Array.from(new Set(filmCards.map((f) => f.genre))), [filmCards]);
+  const handleMoreClick = () => setLimit((l) => l + LIMIT_STEP);
 
-  const filteredFilmCards = useMemo(() => {
-    if (!genre) {
-      return filmCards;
-    }
-    return filmCards.filter((f) => f.genre === genre);
-  }, [filmCards, genre]);
+  useEffect(() => {
+    dispatch(fetchFilms());
+  }, []);
 
-  const filteredFilmCardsWithLimit = useMemo(() => filteredFilmCards.slice(0, limit), [filteredFilmCards, limit]);
-
-  const handleMoreClick = () => {
-    setLimit((l) => l + LIMIT_STEP);
-  };
+  if (!isLoadingComplete(loadingStatus)) {
+    return <div>Спиннер</div>;
+  }
 
   return (
     <div>
@@ -86,7 +87,7 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
           <GenresList genres={genres}/>
           <FilmList filmCards={filteredFilmCardsWithLimit} />
 
-          {limit < filteredFilmCards.length && (
+          {limit < fullLength && (
             <div className="catalog__more">
               <button
                 className="catalog__button"
