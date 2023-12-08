@@ -2,10 +2,7 @@ import {FC, useEffect} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { getRouteConfig } from '../../config/route';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { fetchFilms } from '../../store/api-actions';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFilmsLoadingStatus } from '../../store/reducers/films';
-import { isLoadingComplete } from '../../helpers/loading';
+import { checkLogin } from '../../store/api-actions';
 
 type AppProps = {
   title: string;
@@ -16,15 +13,9 @@ type AppProps = {
 const App: FC<AppProps> = ({title, year, videoLink}) => {
   const dispatch = useAppDispatch();
 
-  const loadingStatus = useAppSelector(getFilmsLoadingStatus);
-
   useEffect(() => {
-    dispatch(fetchFilms());
+    dispatch(checkLogin());
   }, []);
-
-  if (!isLoadingComplete(loadingStatus)) {
-    return <div>Спиннер</div>;
-  }
 
   return (
     <BrowserRouter>
