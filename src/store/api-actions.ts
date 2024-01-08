@@ -1,17 +1,45 @@
 import { APIRoute } from './../config/api/routes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { FilmCard } from '../types/film';
+import { Film, FilmCard, Comment } from '../types/film';
 import { filmsLoaded } from './reducers/films';
 import { ThunkApiConfig } from './types';
 import { AuthorizationError, AuthorizationRequest, AuthorizationResponse } from '../types/authorization';
 import { authFailed, signedIn, signedOut } from './reducers/user-reducer';
 import { AxiosError } from 'axios';
 import { lsApi } from '../config/ls-api/ls-api';
+import { filmLoaded } from './reducers/film';
+import { commentsLoaded } from './reducers/comments';
+import { similarLoaded } from './reducers/similar';
 
 export const fetchFilms = createAsyncThunk<void, undefined, ThunkApiConfig>('films/fetchFilms',
   async (_, {dispatch, extra: api}) => {
     const {data} = await api.get<FilmCard[]>(APIRoute.Films);
     dispatch(filmsLoaded(data));
+  }
+);
+
+export const fetchFilm = createAsyncThunk<void, string, ThunkApiConfig>('film/fetchFilm',
+  async (id: string, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Film>(`${APIRoute.Films }/${id}`);
+      dispatch(filmLoaded(data));
+    } catch (e) {
+      dispatch(filmLoaded(null));
+    }
+  }
+);
+
+export const fetchSimilar = createAsyncThunk<void, string, ThunkApiConfig>('film/fetchSimilar',
+  async (id: string, {dispatch, extra: api}) => {
+    const {data} = await api.get<FilmCard[]>(`${APIRoute.Films }/${id}/similar`);
+    dispatch(similarLoaded(data));
+  }
+);
+
+export const fetchComments = createAsyncThunk<void, string, ThunkApiConfig>('comments/fetchComments',
+  async (id: string, {dispatch, extra: api}) => {
+    const {data} = await api.get<Comment[]>(`${APIRoute.Comments }/${ id}`);
+    dispatch(commentsLoaded(data));
   }
 );
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import {FC} from 'react';
 
 interface RatingProps {
@@ -17,7 +18,7 @@ const Rating: FC<RatingProps> = ({setRating}) => {
     <div className="rating">
       <div className="rating__stars">
         {ratingStars.map((i) => (
-          <>
+          <React.Fragment key={i}>
             <input
               className="rating__input"
               id={`star-${i}`}
@@ -27,7 +28,7 @@ const Rating: FC<RatingProps> = ({setRating}) => {
               onChange={onChangeHandler}
             />
             <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>

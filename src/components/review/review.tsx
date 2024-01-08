@@ -1,8 +1,8 @@
 import {FC} from 'react';
-import { Review } from '../../types/review';
+import { Comment } from '../../types/film/index';
 
 interface Props {
-    review: Review;
+  review: Comment;
 }
 
 export const ReviewCard: FC<Props> = ({review}) => (
@@ -10,10 +10,10 @@ export const ReviewCard: FC<Props> = ({review}) => (
     className="review"
   >
     <blockquote className="review__quote">
-      <p className="review__text">{review.text}</p>
+      <p className="review__text">{review.comment}</p>
 
       <footer className="review__details">
-        <cite className="review__author">{review.username}</cite>
+        <cite className="review__author">{review.user}</cite>
         <time className="review__date" dateTime={review.date}>{review.date}</time>
       </footer>
     </blockquote>
