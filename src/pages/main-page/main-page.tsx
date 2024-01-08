@@ -1,27 +1,26 @@
 import { FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { RoutePaths } from '../../config/route';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getFilms, getFilmsLoadingStatus } from '../../store/reducers/films';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { isLoadingComplete } from '../../helpers/loading';
-import { fetchFilms } from '../../store/api-actions';
+import { fetchFilms, fetchPromoFilm } from '../../store/api-actions';
 import { GenreTabs } from '../../components/genre-tabs/genre-tabs';
+import { PlayButton } from '../../components/play-button/play-button';
+import { MyListButton } from '../../components/my-list-button/my-list-button';
+import { getFilm } from '../../store/reducers/film';
 
-type MainPageProps = {
-  title: string;
-  year: string;
-}
 
-const MainPage: FC<MainPageProps> = ({title, year}) => {
+const MainPage: FC = () => {
   const dispatch = useAppDispatch();
 
   const filmCards = useAppSelector(getFilms);
   const loadingStatus = useAppSelector(getFilmsLoadingStatus);
+  const promoFilm = useAppSelector(getFilm);
 
   useEffect(() => {
     dispatch(fetchFilms());
+    dispatch(fetchPromoFilm());
   }, []);
 
   if (!isLoadingComplete(loadingStatus)) {
@@ -32,7 +31,7 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
     <div>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm?.posterImage} alt={promoFilm?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -42,31 +41,19 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm?.posterImage} alt={`${promoFilm?.name || ''} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                {'//TODO'}
-                <span className="film-card__genre">{'genre'}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <Link className="btn btn--play film-card__button" to={RoutePaths.Player}>
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <PlayButton id={'123'}/>
+                {promoFilm && <MyListButton film={promoFilm}/>}
               </div>
             </div>
           </div>

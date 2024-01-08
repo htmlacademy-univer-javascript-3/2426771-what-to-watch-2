@@ -15,6 +15,8 @@ import FilmList from '../../components/film-list/film-list';
 import { LoadingStatus } from '../../types/loading/loading';
 import { getAuthStatus } from '../../store/reducers/user-reducer';
 import { AuthorizationStatus } from '../../types/authorization';
+import { PlayButton } from '../../components/play-button/play-button';
+import { MyListButton } from '../../components/my-list-button/my-list-button';
 
 const FilmPage: FC = () => {
   const {id} = useParams();
@@ -65,26 +67,8 @@ const FilmPage: FC = () => {
               </p>
 
               <div className="film-card__buttons">
-                <Link
-                  className="btn btn--play film-card__button"
-                  type="button"
-                  to={RoutePaths.Film}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </Link>
-                <button
-                  className="btn btn--list film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <PlayButton id={id || ''}/>
+                {film && <MyListButton film={film}/>}
                 {authStatus === AuthorizationStatus.Auth && (
                   <Link
                     to={getRoutePath(RoutePaths.AddReview, { id: id || '' })}

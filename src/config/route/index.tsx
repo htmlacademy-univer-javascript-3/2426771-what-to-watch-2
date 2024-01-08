@@ -19,12 +19,6 @@ export enum RoutePaths {
   Page404Auto = '*'
 }
 
-type RouteConfigProps = {
-  title: string;
-  year: string;
-  videoLink: string;
-}
-
 export const getRoutePath = (routePath: RoutePaths, props: Record<string, string>) => {
   switch (routePath) {
     case RoutePaths.Film:
@@ -36,9 +30,9 @@ export const getRoutePath = (routePath: RoutePaths, props: Record<string, string
   }
 };
 
-export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, RouteProps> => ({
+export const getRouteConfig = (): Record<RoutePaths, RouteProps> => ({
   [RoutePaths.Main]: {
-    element: <MainPage title={props.title} year={props.year}/>
+    element: <MainPage />
   },
   [RoutePaths.SignIn]: {
     element: <SignInPage/>
@@ -57,7 +51,7 @@ export const getRouteConfig = (props: RouteConfigProps): Record<RoutePaths, Rout
     element: <AddReviewPage />
   },
   [RoutePaths.Player]: {
-    element: <PlayerPage videoLink={props.videoLink}/>
+    element: <PlayerPage />
   },
   [RoutePaths.Page404]: {
     element: <NotFoundPage/>
