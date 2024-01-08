@@ -1,9 +1,9 @@
 import {FC, useState} from 'react';
 import FilmCard from '../film-card/film-card';
-import { FilmCards } from '../../types/film';
+import { FilmCard as FilmCardType } from '../../types/film/index';
 
 interface FilmListProps {
-  filmCards: FilmCards;
+  filmCards: FilmCardType[];
 }
 
 const FilmList: FC<FilmListProps> = ({filmCards}) => {

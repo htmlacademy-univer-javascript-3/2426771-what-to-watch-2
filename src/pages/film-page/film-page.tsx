@@ -1,33 +1,43 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { RoutePaths, getRoutePath } from '../../config/route';
 import Header from '../../components/header/header';
 import FilmTabsMenu from '../../components/film-tabs-menu/film-tabs-menu';
-import { Film } from '../../types/film/index';
 import { useHash } from '../../hooks/use-hash';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import { FilmTabs as FilmTabsType } from '../../types/film-tab/';
+import { fetchFilm, fetchSimilar } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getFilm, getFilmLoadingStatus } from '../../store/reducers/film';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { getSimilar } from '../../store/reducers/similar';
 import FilmList from '../../components/film-list/film-list';
+import { LoadingStatus } from '../../types/loading/loading';
+import { getAuthStatus } from '../../store/reducers/user-reducer';
+import { AuthorizationStatus } from '../../types/authorization';
 
 const FilmPage: FC = () => {
   const {id} = useParams();
-  const [film, setFilm] = useState<Film>();
+  const film = useAppSelector(getFilm);
+  const filmLoadingStatus = useAppSelector(getFilmLoadingStatus);
+  const similar = useAppSelector(getSimilar);
+  const authStatus = useAppSelector(getAuthStatus);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
   const hash = useHash<FilmTabsType>();
+
+  if (filmLoadingStatus === LoadingStatus.Loaded && film === null) {
+    navigate(RoutePaths.Page404);
+  }
 
   useEffect(() => {
     if (!id) {
       return navigate(RoutePaths.Page404);
     }
 
-    // const resFilm = fetchFilm(id);
-
-    // if (!resFilm) {
-    //   return navigate(RoutePaths.Page404);
-    // }
-
-    // setFilm(resFilm);
+    dispatch(fetchFilm(id));
+    dispatch(fetchSimilar(id));
   }, [id, navigate]);
 
   if (!hash) {
@@ -36,10 +46,10 @@ const FilmPage: FC = () => {
 
   return (
     <div>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor: film?.backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={film?.posterImage} alt={film?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -48,10 +58,10 @@ const FilmPage: FC = () => {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{film?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{film?.genre}</span>
+                <span className="film-card__year">{film?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -75,12 +85,14 @@ const FilmPage: FC = () => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link
-                  to={getRoutePath(RoutePaths.AddReview, { id: id || '' })}
-                  className="btn film-card__button"
-                >
-                  Add review
-                </Link>
+                {authStatus === AuthorizationStatus.Auth && (
+                  <Link
+                    to={getRoutePath(RoutePaths.AddReview, { id: id || '' })}
+                    className="btn film-card__button"
+                  >
+                    Add review
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -90,8 +102,8 @@ const FilmPage: FC = () => {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={film?.posterImage}
+                alt={`${film?.name ?? ''} poster`}
                 width="218"
                 height="327"
               />
@@ -107,7 +119,7 @@ const FilmPage: FC = () => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {/* <FilmList filmCards={filmCards.slice(0, 4)} /> */}
+          <FilmList filmCards={similar.slice(0, 4)} />
         </section>
 
         <footer className="page-footer">

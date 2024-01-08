@@ -3,12 +3,20 @@ import { filtersReducer } from './reducers/filters';
 import { api } from '../config/api/api';
 import { filmsReducer } from './reducers/films';
 import { userReducer } from './reducers/user-reducer';
+import { filmReducer } from './reducers/film';
+import { commentsReducer } from './reducers/comments';
+import { similarReducer } from './reducers/similar';
+import { favoriteReducer } from './reducers/favorite';
 
 export const store = configureStore({
   reducer: {
     filters: filtersReducer,
     films: filmsReducer,
-    user: userReducer
+    film: filmReducer,
+    favorite: favoriteReducer,
+    similar: similarReducer,
+    user: userReducer,
+    comments: commentsReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     thunk: {

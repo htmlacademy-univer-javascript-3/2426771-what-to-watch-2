@@ -1,6 +1,9 @@
-import {FC, useEffect, useState} from 'react';
-import { Review } from '../../types/review';
+import { FC, useEffect } from 'react';
 import { ReviewCard } from '../review/review';
+import { fetchComments } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { getComments } from '../../store/reducers/comments';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 interface Props {
   filmId: string;
@@ -9,25 +12,20 @@ interface Props {
 export const FilmTabReviews: FC<Props> = ({filmId}) => {
   const col1 = [];
   const col2 = [];
-
-  const [reviews, setReviews] = useState<Review[]>([]);
-
-  const onLoad = async () => {
-    // const reviewsRes = await fetchReviews(filmId);
-    // setReviews(reviewsRes);
-  };
+  const dispatch = useAppDispatch();
+  const comments = useAppSelector(getComments);
 
   useEffect(() => {
-    onLoad();
-  });
+    dispatch(fetchComments(filmId));
+  }, []);
 
 
-  for (let i = 0; i < reviews.length; i++) {
-    const review = reviews[i];
+  for (let i = 0; i < comments.length; i++) {
+    const comment = comments[i];
     if (i % 2) {
-      col2.push(review);
+      col2.push(comment);
     } else {
-      col1.push(review);
+      col1.push(comment);
     }
   }
 
