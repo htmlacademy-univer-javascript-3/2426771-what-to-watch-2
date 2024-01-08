@@ -1,32 +1,24 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
 import Header from '../../components/header/header';
-import { GenresList } from '../../components/genres-list/genres-list';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getFilms, getFilmsLoadingStatus } from '../../store/reducers/films';
-import FilmList from '../../components/film-list/film-list';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { isLoadingComplete } from '../../helpers/loading';
 import { fetchFilms } from '../../store/api-actions';
-import { useFilteredFilmCardsWithLimit } from '../../hooks/use-filtered-film-cards-with-limit';
+import { GenreTabs } from '../../components/genre-tabs/genre-tabs';
 
 type MainPageProps = {
   title: string;
   year: string;
 }
 
-const LIMIT_STEP = 8;
-
 const MainPage: FC<MainPageProps> = ({title, year}) => {
   const dispatch = useAppDispatch();
 
   const filmCards = useAppSelector(getFilms);
   const loadingStatus = useAppSelector(getFilmsLoadingStatus);
-  const [limit, setLimit] = useState(LIMIT_STEP);
-  const {genre, genres, fullLength, filteredFilmCardsWithLimit} = useFilteredFilmCardsWithLimit(filmCards, limit);
-
-  const handleMoreClick = () => setLimit((l) => l + LIMIT_STEP);
 
   useEffect(() => {
     dispatch(fetchFilms());
@@ -56,7 +48,8 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
             <div className="film-card__desc">
               <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
+                {'//TODO'}
+                <span className="film-card__genre">{'genre'}</span>
                 <span className="film-card__year">{year}</span>
               </p>
 
@@ -84,20 +77,7 @@ const MainPage: FC<MainPageProps> = ({title, year}) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={genres}/>
-          <FilmList filmCards={filteredFilmCardsWithLimit} />
-
-          {limit < fullLength && (
-            <div className="catalog__more">
-              <button
-                className="catalog__button"
-                type="button"
-                onClick={handleMoreClick}
-              >
-                Show more
-              </button>
-            </div>
-          )}
+          <GenreTabs filmCards={filmCards}/>
         </section>
 
         <footer className="page-footer">
