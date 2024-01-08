@@ -30,6 +30,17 @@ export const fetchFilm = createAsyncThunk<void, string, ThunkApiConfig>('film/fe
   }
 );
 
+export const fetchPromoFilm = createAsyncThunk<void, undefined, ThunkApiConfig>('film/fetchFilm',
+  async (_, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Film>(APIRoute.Promo);
+      dispatch(filmLoaded(data));
+    } catch (e) {
+      dispatch(filmLoaded(null));
+    }
+  }
+);
+
 export const fetchSimilar = createAsyncThunk<void, string, ThunkApiConfig>('film/fetchSimilar',
   async (id: string, {dispatch, extra: api}) => {
     const {data} = await api.get<FilmCard[]>(`${APIRoute.Films }/${id}/similar`);
