@@ -10,6 +10,7 @@ import { lsApi } from '../config/ls-api/ls-api';
 import { filmLoaded } from './reducers/film';
 import { commentsLoaded } from './reducers/comments';
 import { similarLoaded } from './reducers/similar';
+import { favoriteLoaded } from './reducers/favorite';
 
 export const fetchFilms = createAsyncThunk<void, undefined, ThunkApiConfig>('films/fetchFilms',
   async (_, {dispatch, extra: api}) => {
@@ -40,6 +41,13 @@ export const fetchComments = createAsyncThunk<void, string, ThunkApiConfig>('com
   async (id: string, {dispatch, extra: api}) => {
     const {data} = await api.get<Comment[]>(`${APIRoute.Comments }/${ id}`);
     dispatch(commentsLoaded(data));
+  }
+);
+
+export const fetchFavorite = createAsyncThunk<void, undefined, ThunkApiConfig>('favorite/fetchFavorite',
+  async (_, {dispatch, extra: api}) => {
+    const {data} = await api.get<FilmCard[]>(`${APIRoute.Favorite}`);
+    dispatch(favoriteLoaded(data));
   }
 );
 

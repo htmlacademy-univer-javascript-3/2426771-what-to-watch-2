@@ -1,32 +1,38 @@
 import {FC} from 'react';
 import FilmList from '../../components/film-list/film-list';
 import Header from '../../components/header/header';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getFavorite } from '../../store/reducers/favorite';
 
-const MyListPage: FC = () => (
-  <div className="user-page">
-    <Header>
-      <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
-    </Header>
+const MyListPage: FC = () => {
+  const favorite = useAppSelector(getFavorite);
 
-    <section className="catalog">
-      <h2 className="catalog__title visually-hidden">Catalog</h2>
-      <FilmList filmCards={filmCards} />
-    </section>
+  return (
+    <div className="user-page">
+      <Header>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+      </Header>
 
-    <footer className="page-footer">
-      <div className="logo">
-        <a href="main.html" className="logo__link logo__link--light">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </a>
-      </div>
+      <section className="catalog">
+        <h2 className="catalog__title visually-hidden">Catalog</h2>
+        <FilmList filmCards={favorite} />
+      </section>
 
-      <div className="copyright">
-        <p>© 2019 What to watch Ltd.</p>
-      </div>
-    </footer>
-  </div>
-);
+      <footer className="page-footer">
+        <div className="logo">
+          <a href="main.html" className="logo__link logo__link--light">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </a>
+        </div>
+
+        <div className="copyright">
+          <p>© 2019 What to watch Ltd.</p>
+        </div>
+      </footer>
+    </div>
+  )
+};
 
 export default MyListPage;

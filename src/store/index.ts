@@ -6,12 +6,14 @@ import { userReducer } from './reducers/user-reducer';
 import { filmReducer } from './reducers/film';
 import { commentsReducer } from './reducers/comments';
 import { similarReducer } from './reducers/similar';
+import { favoriteReducer } from './reducers/favorite';
 
 export const store = configureStore({
   reducer: {
     filters: filtersReducer,
     films: filmsReducer,
     film: filmReducer,
+    favorite: favoriteReducer,
     similar: similarReducer,
     user: userReducer,
     comments: commentsReducer

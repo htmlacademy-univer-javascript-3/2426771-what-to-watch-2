@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { ReviewCard } from '../review/review';
-import { fetchComments, fetchFilm } from '../../store/api-actions';
+import { fetchComments } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { getComments } from '../../store/reducers/comments';
 import { useAppSelector } from '../../hooks/use-app-selector';
