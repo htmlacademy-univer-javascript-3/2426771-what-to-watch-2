@@ -32,7 +32,7 @@ const MyListPage: FC = () => {
         </div>
       </footer>
     </div>
-  )
+  );
 };
 
 export default MyListPage;
