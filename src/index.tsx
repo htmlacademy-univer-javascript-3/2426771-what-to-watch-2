@@ -11,11 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        title={'The Grand Budapest Hotel'}
-        year={'2014'}
-        videoLink={'img/player-poster.jpg'}
-      />
+      <App/>
     </Provider>
   </React.StrictMode>
 );
