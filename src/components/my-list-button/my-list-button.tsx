@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getFavorite } from '../../store/reducers/favorite/favorite';
 import { Film } from '../../types/film';
 import { APIRoute } from '../../config/api/routes';
 import { api } from '../../config/api/api';
 import { filmLoaded } from '../../store/reducers/film/film';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { fetchFavorite } from '../../store/api-actions';
 import { getAuthStatus } from '../../store/reducers/user/user';
 import { AuthorizationStatus } from '../../types/authorization';

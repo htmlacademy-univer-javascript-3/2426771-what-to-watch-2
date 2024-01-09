@@ -2,23 +2,38 @@ import {FC, useState} from 'react';
 import Rating from '../rating/rating';
 import { APIRoute } from '../../config/api/routes';
 import { api } from '../../config/api/api';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { RoutePaths } from '../../config/route';
 
 const CommentForm: FC<{ backgroundColor: string | undefined }> = (props) => {
   const {id} = useParams();
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(0);
+  const [sending, setSending] = useState(false);
+
+  const navigate = useNavigate();
 
   const sendComment = async () => {
-    if (id === undefined) {
-      throw 'id empty';
+    try {
+      setSending(true);
+      if (id === undefined) {
+        throw 'id empty';
+      }
+      await api.post<Comment>(`${APIRoute.SendComment}/${id}`, {comment: reviewText, rating});
+      navigate(RoutePaths.Film.replace(':id', id));
+    } catch (error) {
+      setSending(false);
+      setReviewText((text) => `${text } ошибка!`);
     }
-    await api.post<Comment>(`${APIRoute.SendComment}/${id}`, {comment: reviewText, rating});
   };
+
+  const isFormValid = reviewText.length > 50 && reviewText.length < 400 && rating !== 0 && !sending;
 
   const handleSubmitClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    sendComment();
+    if (isFormValid) {
+      sendComment();
+    }
   };
 
   return (
@@ -35,7 +50,7 @@ const CommentForm: FC<{ backgroundColor: string | undefined }> = (props) => {
           value={reviewText}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" onClick={handleSubmitClick}>Post</button>
+          <button className="add-review__btn" type="submit" disabled={!isFormValid} onClick={handleSubmitClick}>Post</button>
         </div>
 
       </div>

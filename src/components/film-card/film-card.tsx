@@ -17,14 +17,16 @@ const FilmCard: FC<FilmCardProps> = ({filmCard}) => {
       onMouseOver={() => setActive(true)}
       onMouseOut={() => setActive(null)}
     >
-      <VideoPreview
-        className="small-film-card__image"
-        isActive={active ?? false}
-        previewImage={filmCard.previewImage}
-        videoLink={filmCard.previewVideoLink}
-        alt={filmCard.name}
-        videoTimeout={1000}
-      />
+      <Link className="small-film-card__link" to={getRoutePath(RoutePaths.Film, {id: filmCard.id})}>
+        <VideoPreview
+          className="small-film-card__image"
+          isActive={active ?? false}
+          previewImage={filmCard.previewImage}
+          videoLink={filmCard.previewVideoLink}
+          alt={filmCard.name}
+          videoTimeout={1000}
+        />
+      </Link>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={getRoutePath(RoutePaths.Film, {id: filmCard.id})}>{filmCard.name}</Link>
       </h3>

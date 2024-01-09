@@ -1,19 +1,20 @@
 import { APIRoute } from './../config/api/routes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, FilmCard, Comment } from '../types/film';
-import { filmsLoaded } from './reducers/films/films';
+import { filmsLoaded, filmsRequested } from './reducers/films/films';
 import { ThunkApiConfig } from './types';
 import { AuthorizationError, AuthorizationRequest, AuthorizationResponse } from '../types/authorization';
 import { authFailed, signedIn, signedOut } from './reducers/user/user';
 import { AxiosError } from 'axios';
 import { lsApi } from '../config/ls-api/ls-api';
-import { filmLoaded, filmNotLoaded } from './reducers/film/film';
-import { commentsLoaded } from './reducers/comments/comments';
-import { similarLoaded } from './reducers/similar/similar';
-import { favoriteLoaded } from './reducers/favorite/favorite';
+import { filmLoaded, filmNotLoaded, filmRequested } from './reducers/film/film';
+import { commentsLoaded, commentsRequested } from './reducers/comments/comments';
+import { similarLoaded, similarRequested } from './reducers/similar/similar';
+import { favoriteLoaded, favoriteRequested } from './reducers/favorite/favorite';
 
 export const fetchFilms = createAsyncThunk<void, undefined, ThunkApiConfig>('films/fetchFilms',
   async (_, {dispatch, extra: api}) => {
+    dispatch(filmsRequested());
     const {data} = await api.get<FilmCard[]>(APIRoute.Films);
     dispatch(filmsLoaded(data));
   }
@@ -22,6 +23,7 @@ export const fetchFilms = createAsyncThunk<void, undefined, ThunkApiConfig>('fil
 export const fetchFilm = createAsyncThunk<void, string, ThunkApiConfig>('film/fetchFilm',
   async (id: string, {dispatch, extra: api}) => {
     try {
+      dispatch(filmRequested());
       const {data} = await api.get<Film>(`${APIRoute.Films}/${id}`);
       dispatch(filmLoaded(data));
     } catch (e) {
@@ -33,6 +35,7 @@ export const fetchFilm = createAsyncThunk<void, string, ThunkApiConfig>('film/fe
 export const fetchPromoFilm = createAsyncThunk<void, undefined, ThunkApiConfig>('film/fetchFilm',
   async (_, {dispatch, extra: api}) => {
     try {
+      dispatch(filmRequested());
       const {data} = await api.get<Film>(APIRoute.Promo);
       dispatch(filmLoaded(data));
     } catch (e) {
@@ -43,6 +46,7 @@ export const fetchPromoFilm = createAsyncThunk<void, undefined, ThunkApiConfig>(
 
 export const fetchSimilar = createAsyncThunk<void, string, ThunkApiConfig>('film/fetchSimilar',
   async (id: string, {dispatch, extra: api}) => {
+    dispatch(similarRequested());
     const {data} = await api.get<FilmCard[]>(`${APIRoute.Films }/${id}/similar`);
     dispatch(similarLoaded(data));
   }
@@ -50,6 +54,7 @@ export const fetchSimilar = createAsyncThunk<void, string, ThunkApiConfig>('film
 
 export const fetchComments = createAsyncThunk<void, string, ThunkApiConfig>('comments/fetchComments',
   async (id: string, {dispatch, extra: api}) => {
+    dispatch(commentsRequested());
     const {data} = await api.get<Comment[]>(`${APIRoute.Comments }/${ id}`);
     dispatch(commentsLoaded(data));
   }
@@ -57,6 +62,7 @@ export const fetchComments = createAsyncThunk<void, string, ThunkApiConfig>('com
 
 export const fetchFavorite = createAsyncThunk<void, undefined, ThunkApiConfig>('favorite/fetchFavorite',
   async (_, {dispatch, extra: api}) => {
+    dispatch(favoriteRequested());
     const {data} = await api.get<FilmCard[]>(`${APIRoute.Favorite}`);
     dispatch(favoriteLoaded(data));
   }

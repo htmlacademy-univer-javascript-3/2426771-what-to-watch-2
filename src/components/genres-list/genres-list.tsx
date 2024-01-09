@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
-import { useHash } from '../../hooks/use-hash';
+import { useHash } from '../../hooks/use-hash/use-hash';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { genreChanged } from '../../store/reducers/filters/filters';
 
 interface Props {
@@ -36,7 +36,7 @@ export const GenresList: FC<Props> = ({ genres }) => {
           key={genre.genre}
           className={[
             'catalog__genres-item',
-            hash === genre.href ? 'catalog__genres-item--active' : undefined,
+            hash === genre.href || (hash === undefined && genre.href === '') ? 'catalog__genres-item--active' : undefined,
           ].join(' ')}
         >
           <Link to={`#${genre.href ?? ''}`} className="catalog__genres-link">

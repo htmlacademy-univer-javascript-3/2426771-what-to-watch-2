@@ -4,16 +4,19 @@ import { RoutePaths, getRoutePath } from '../../config/route';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import CommentForm from '../../components/comment-form/comment-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getFilm, getFilmLoadingStatus } from '../../store/reducers/film/film';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { LoadingStatus } from '../../types/loading/loading';
 import { fetchFilm } from '../../store/api-actions';
+import { getAuthStatus } from '../../store/reducers/user/user';
+import { AuthorizationStatus } from '../../types/authorization';
 
 const AddReviewPage: FC = () => {
   const { id } = useParams();
   const film = useAppSelector(getFilm);
   const filmLoadingStatus = useAppSelector(getFilmLoadingStatus);
+  const authStatus = useAppSelector(getAuthStatus);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -23,12 +26,12 @@ const AddReviewPage: FC = () => {
   }
 
   useEffect(() => {
-    if (!id) {
+    if (!id || authStatus !== AuthorizationStatus.Auth) {
       return navigate(RoutePaths.Page404);
     }
 
     dispatch(fetchFilm(id));
-  }, [id, navigate]);
+  }, [id, navigate, authStatus]);
 
   return (
     <section

@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { login } from '../../store/api-actions';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getAuthError, getAuthStatus } from '../../store/reducers/user/user';
 import { AuthorizationStatus } from '../../types/authorization';
 

@@ -3,7 +3,7 @@ import {FC} from 'react';
 
 interface Props {
   director: string;
-  starring: [string];
+  starring: string[];
   runTime: number;
   genre: string;
   released: number;
@@ -35,7 +35,7 @@ const FilmTabDetails: FC<Props> = ({director, starring, runTime, genre, released
     <div className="film-card__text-col">
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Run Time</strong>
-        <span className="film-card__details-value">{runTime}</span>
+        <span className="film-card__details-value">{`${Math.floor(runTime / 60)}h ${runTime % 60}m`}</span>
       </p>
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Genre</strong>

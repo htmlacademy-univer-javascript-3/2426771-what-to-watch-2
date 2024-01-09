@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import { useVideoPreview } from '../../hooks/use-video-preview';
+import { useVideoPreview } from '../../hooks/use-video-preview/use-video-preview';
 import c from './video-preview.module.css';
 
 interface Props {
