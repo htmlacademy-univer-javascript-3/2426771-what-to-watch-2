@@ -8,7 +8,7 @@ interface RatingProps {
 const ratingStars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].reverse();
 
 const Rating: FC<RatingProps> = ({setRating}) => {
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setRating(Number(e.target.value));
     }
@@ -25,7 +25,7 @@ const Rating: FC<RatingProps> = ({setRating}) => {
               type="radio"
               name="rating"
               value={i}
-              onChange={onChangeHandler}
+              onChange={handleChangeInput}
             />
             <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
           </React.Fragment>

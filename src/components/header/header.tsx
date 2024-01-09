@@ -2,9 +2,9 @@ import { FC, ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
 import { AuthorizationStatus } from '../../types/authorization';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthStatus } from '../../store/reducers/user/user';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getAuthStatus, getAvatarUrl } from '../../store/reducers/user/user';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { logout } from '../../store/api-actions';
 
 interface HeaderProps {
@@ -13,6 +13,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ children }) => {
   const authStatus = useAppSelector(getAuthStatus);
+  const avatarUrl = useAppSelector(getAvatarUrl);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -40,7 +41,7 @@ const Header: FC<HeaderProps> = ({ children }) => {
               onClick={() => navigate(RoutePaths.MyList)}
             >
               <img
-                src="img/avatar.jpg"
+                src={avatarUrl || ''}
                 alt="User avatar"
                 width="63"
                 height="63"

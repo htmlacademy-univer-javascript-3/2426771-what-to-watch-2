@@ -13,7 +13,7 @@ describe('Component: Breadcrumbs', () => {
       links: [{title: 'child1', link: 'http://localhost:3001/link1'}],
       lastChild: 'child2'
     };
-    
+
     const Component = withRouter(<Breadcrumbs breadcrumbs={breadcrumbs} />, createMemoryHistory());
 
     render(Component);

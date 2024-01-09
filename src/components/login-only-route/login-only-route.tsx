@@ -3,7 +3,7 @@ import LimitedRoute from '../limited-route/limited-route';
 import { AuthorizationStatus } from '../../types/authorization';
 import { RoutePaths } from '../../config/route';
 import { getAuthStatus } from '../../store/reducers/user/user';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
 type LoginOnlyRouteProps = {
   children: ReactElement;

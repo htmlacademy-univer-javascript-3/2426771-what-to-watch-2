@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import Header from '../../components/header/header';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getFavorite } from '../../store/reducers/favorite/favorite';
 
 const MyListPage: FC = () => {

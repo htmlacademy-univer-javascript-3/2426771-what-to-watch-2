@@ -9,7 +9,6 @@ import MainPage from '../../pages/main-page/main-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import { AuthorizationStatus } from '../../types/authorization';
 import { initialState as userInitialState } from '../../store/reducers/user/user';
-import FilmPage from '../../pages/film-page/film-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 describe('Application Routing', () => {
@@ -48,20 +47,6 @@ describe('Application Routing', () => {
     render(withStoreComponent);
 
     expect(screen.getByText('My list')).toBeInTheDocument();
-  });
-
-  it('should render "FilmPage" when user navigate to "/film/:id"', () => {
-    //TODO
-    // mockHistory.push(RoutePaths.Film.replace(':id', 'c8682b0c-a8dd-4f2d-befd-36d59e4fcf7c'));
-    // console.log(mockHistory.location);
-
-    // const store = makeFakeStore();
-    // const { withStoreComponent, mockAxiosAdapter } = withStore(withRouter(<FilmPage />, mockHistory), store);
-
-    // render(withStoreComponent);
-
-    // expect(screen.getByText('My list')).toBeInTheDocument();
-    // screen.debug();
   });
 
   it('should render "NotFoundPage" when user navigate to "/404"', () => {

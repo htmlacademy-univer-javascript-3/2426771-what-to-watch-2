@@ -45,6 +45,7 @@ export const { signedIn, signedOut, authFailed } = userSlice.actions;
 
 export const getAuthStatus = (state: RootState) => state.user.authorizationStatus;
 export const getAuthError = (state: RootState) => state.user.error;
+export const getAvatarUrl = (state: RootState) => state.user.avatarUrl;
 
 export const userReducer = userSlice.reducer;
 

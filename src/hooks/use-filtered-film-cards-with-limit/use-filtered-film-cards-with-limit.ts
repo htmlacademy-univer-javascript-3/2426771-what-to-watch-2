@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { FilmCard } from '../types/film';
-import { useAppSelector } from './use-app-selector';
-import { getGenre } from '../store/reducers/filters/filters';
+import { FilmCard } from '../../types/film';
+import { useAppSelector } from '../use-app-selector/use-app-selector';
+import { getGenre } from '../../store/reducers/filters/filters';
 
 export const useFilteredFilmCardsWithLimit = (filmCards: FilmCard[], limit: number) => {
   const genre = useAppSelector(getGenre);

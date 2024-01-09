@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import Header from '../../components/header/header';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import {
   getFilms,
   getFilmsLoadingStatus,
 } from '../../store/reducers/films/films';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { isLoadingComplete } from '../../helpers/loading';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { getIsLoadingComplete } from '../../helpers/loading';
 import { fetchFilms, fetchPromoFilm } from '../../store/api-actions';
 import { GenreTabs } from '../../components/genre-tabs/genre-tabs';
 import { PlayButton } from '../../components/play-button/play-button';
@@ -25,7 +25,7 @@ const MainPage: FC = () => {
     dispatch(fetchPromoFilm());
   }, []);
 
-  if (!isLoadingComplete(loadingStatus)) {
+  if (!getIsLoadingComplete(loadingStatus)) {
     return <div>Спиннер</div>;
   }
 
@@ -59,7 +59,7 @@ const MainPage: FC = () => {
               </p>
 
               <div className="film-card__buttons">
-                <PlayButton id={'123'} />
+                <PlayButton id={promoFilm?.id || ''} />
                 {promoFilm && <MyListButton film={promoFilm} />}
               </div>
             </div>

@@ -5,11 +5,11 @@ import thunk from 'redux-thunk';
 import { checkLogin, fetchComments, fetchFavorite, fetchFilm, fetchFilms, fetchPromoFilm, fetchSimilar, login, logout } from './api-actions';
 import { APIRoute } from '../config/api/routes';
 import { RootState } from '.';
-import { commentsLoaded } from './reducers/comments/comments';
-import { favoriteLoaded } from './reducers/favorite/favorite';
-import { filmLoaded, filmNotLoaded } from './reducers/film/film';
-import { filmsLoaded } from './reducers/films/films';
-import { similarLoaded } from './reducers/similar/similar';
+import { commentsLoaded, commentsRequested } from './reducers/comments/comments';
+import { favoriteLoaded, favoriteRequested } from './reducers/favorite/favorite';
+import { filmLoaded, filmNotLoaded, filmRequested } from './reducers/film/film';
+import { filmsLoaded, filmsRequested } from './reducers/films/films';
+import { similarLoaded, similarRequested } from './reducers/similar/similar';
 import { authFailed, signedIn, signedOut } from './reducers/user/user';
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
@@ -37,6 +37,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFilms.pending.type,
+        filmsRequested.type,
         filmsLoaded.type,
         fetchFilms.fulfilled.type,
       ]);
@@ -50,6 +51,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFilms.pending.type,
+        filmsRequested.type,
         fetchFilms.rejected.type,
       ]);
     });
@@ -85,6 +87,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFilm.pending.type,
+        filmRequested.type,
         filmLoaded.type,
         fetchFilm.fulfilled.type,
       ]);
@@ -98,6 +101,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFilm.pending.type,
+        filmRequested.type,
         filmNotLoaded.type,
         fetchFilm.fulfilled.type,
       ]);
@@ -134,6 +138,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFilm.pending.type,
+        filmRequested.type,
         filmLoaded.type,
         fetchFilm.fulfilled.type,
       ]);
@@ -147,6 +152,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFilm.pending.type,
+        filmRequested.type,
         filmNotLoaded.type,
         fetchFilm.fulfilled.type,
       ]);
@@ -162,6 +168,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchSimilar.pending.type,
+        similarRequested.type,
         similarLoaded.type,
         fetchSimilar.fulfilled.type,
       ]);
@@ -175,6 +182,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchSimilar.pending.type,
+        similarRequested.type,
         fetchSimilar.rejected.type,
       ]);
     });
@@ -189,6 +197,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchComments.pending.type,
+        commentsRequested.type,
         commentsLoaded.type,
         fetchComments.fulfilled.type,
       ]);
@@ -202,6 +211,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchComments.pending.type,
+        commentsRequested.type,
         fetchComments.rejected.type,
       ]);
     });
@@ -216,6 +226,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFavorite.pending.type,
+        favoriteRequested.type,
         favoriteLoaded.type,
         fetchFavorite.fulfilled.type,
       ]);
@@ -229,6 +240,7 @@ describe('Async actions', () => {
 
       expect(actions).toEqual([
         fetchFavorite.pending.type,
+        favoriteRequested.type,
         fetchFavorite.rejected.type,
       ]);
     });

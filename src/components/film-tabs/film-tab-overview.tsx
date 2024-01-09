@@ -6,7 +6,7 @@ interface Props {
   rating: number;
   scoresCount: number;
   director: string;
-  starring: [string];
+  starring: string[];
 }
 
 const FilmTabOverview: FC<Props> = ({rating, scoresCount, director, starring, description}) => (

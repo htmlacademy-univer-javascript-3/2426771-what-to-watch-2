@@ -7,7 +7,7 @@ describe('Component: ReviewCard', () => {
   it('should render correctly', () => {
     const review = {
       id: '',
-      date: 'date',
+      date: '2024-01-09T19:27:18.419Z',
       user: 'user',
       comment: 'comment',
       rating: 4
@@ -17,7 +17,7 @@ describe('Component: ReviewCard', () => {
     render(Component);
 
     expect(screen.getByText(review.comment));
-    expect(screen.getByText(review.date));
+    expect(screen.getByText('January 9, 2024'));
     expect(screen.getByText(review.rating));
     expect(screen.getByText(review.user));
   });
