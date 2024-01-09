@@ -1,15 +1,17 @@
 import { FC, useEffect } from 'react';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFilms, getFilmsLoadingStatus } from '../../store/reducers/films';
+import {
+  getFilms,
+  getFilmsLoadingStatus,
+} from '../../store/reducers/films/films';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { isLoadingComplete } from '../../helpers/loading';
 import { fetchFilms, fetchPromoFilm } from '../../store/api-actions';
 import { GenreTabs } from '../../components/genre-tabs/genre-tabs';
 import { PlayButton } from '../../components/play-button/play-button';
 import { MyListButton } from '../../components/my-list-button/my-list-button';
-import { getFilm } from '../../store/reducers/film';
-
+import { getFilm } from '../../store/reducers/film/film';
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +43,12 @@ const MainPage: FC = () => {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm?.posterImage} alt={`${promoFilm?.name || ''} poster`} width="218" height="327" />
+              <img
+                src={promoFilm?.posterImage}
+                alt={`${promoFilm?.name || ''} poster`}
+                width="218"
+                height="327"
+              />
             </div>
 
             <div className="film-card__desc">
@@ -52,8 +59,8 @@ const MainPage: FC = () => {
               </p>
 
               <div className="film-card__buttons">
-                <PlayButton id={'123'}/>
-                {promoFilm && <MyListButton film={promoFilm}/>}
+                <PlayButton id={'123'} />
+                {promoFilm && <MyListButton film={promoFilm} />}
               </div>
             </div>
           </div>
@@ -64,7 +71,7 @@ const MainPage: FC = () => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreTabs filmCards={filmCards}/>
+          <GenreTabs filmCards={filmCards} />
         </section>
 
         <footer className="page-footer">
@@ -86,4 +93,3 @@ const MainPage: FC = () => {
 };
 
 export default MainPage;
-

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { AuthorizationError, AuthorizationResponse, AuthorizationStatus } from '../../types/authorization';
+import { RootState } from '../..';
+import { AuthorizationError, AuthorizationResponse, AuthorizationStatus } from '../../../types/authorization';
 
 export interface UserState {
   authorizationStatus: AuthorizationStatus;
@@ -11,7 +11,7 @@ export interface UserState {
   token: string | null;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   name: null,

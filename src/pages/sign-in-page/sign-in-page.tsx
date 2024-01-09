@@ -1,10 +1,10 @@
-import {FC, useState} from 'react';
+import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { login } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthError, getAuthStatus } from '../../store/reducers/user-reducer';
+import { getAuthError, getAuthStatus } from '../../store/reducers/user/user';
 import { AuthorizationStatus } from '../../types/authorization';
 
 const SignInPage: FC = () => {
@@ -24,17 +24,14 @@ const SignInPage: FC = () => {
   const errors = error?.details.map((d) => d.property) ?? [];
 
   const handleOnSubmit = () => {
-    dispatch(login({email, password}));
+    dispatch(login({ email, password }));
   };
 
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <Link
-            to={RoutePaths.Main}
-            className="logo__link"
-          >
+          <Link to={RoutePaths.Main} className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
@@ -45,21 +42,17 @@ const SignInPage: FC = () => {
       </header>
 
       <div className="sign-in user-page__content">
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="sign-in__form"
-        >
-          {message &&
-            <div
-              className="sign-in__message"
-            >
+        <form onSubmit={(e) => e.preventDefault()} className="sign-in__form">
+          {message && (
+            <div className="sign-in__message">
               <p>{message}</p>
-            </div>}
+            </div>
+          )}
           <div className="sign-in__fields">
             <div
               className={[
                 'sign-in__field',
-                errors.includes('email') ? 'sign-in__field--error' : ''
+                errors.includes('email') ? 'sign-in__field--error' : '',
               ].join(' ')}
             >
               <input
@@ -71,12 +64,17 @@ const SignInPage: FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
+              <label
+                className="sign-in__label visually-hidden"
+                htmlFor="user-email"
+              >
+                Email address
+              </label>
             </div>
             <div
               className={[
                 'sign-in__field',
-                errors.includes('password') ? 'sign-in__field--error' : ''
+                errors.includes('password') ? 'sign-in__field--error' : '',
               ].join(' ')}
             >
               <input
@@ -88,7 +86,12 @@ const SignInPage: FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
+              <label
+                className="sign-in__label visually-hidden"
+                htmlFor="user-password"
+              >
+                Password
+              </label>
             </div>
           </div>
           <div className="sign-in__submit">

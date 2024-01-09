@@ -1,14 +1,14 @@
-import { LoadingStatus } from './../../types/loading/loading';
+import { LoadingStatus } from '../../../types/loading/loading';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { FilmCard } from '../../types/film';
-import { RootState } from '..';
+import { FilmCard } from '../../../types/film';
+import { RootState } from '../..';
 
 export interface FilmsState {
   films: FilmCard[];
   loadingStatus: LoadingStatus;
 }
 
-const initialState: FilmsState = {
+export const initialState: FilmsState = {
   films: [],
   loadingStatus: LoadingStatus.Unknown
 };

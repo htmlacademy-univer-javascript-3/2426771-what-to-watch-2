@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useHash } from '../../hooks/use-hash';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { genreChanged } from '../../store/reducers/filters';
+import { genreChanged } from '../../store/reducers/filters/filters';
 
 interface Props {
   genres: string[];

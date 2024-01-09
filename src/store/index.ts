@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { filtersReducer } from './reducers/filters';
+import { filtersReducer } from './reducers/filters/filters';
 import { api } from '../config/api/api';
-import { filmsReducer } from './reducers/films';
-import { userReducer } from './reducers/user-reducer';
-import { filmReducer } from './reducers/film';
-import { commentsReducer } from './reducers/comments';
-import { similarReducer } from './reducers/similar';
-import { favoriteReducer } from './reducers/favorite';
+import { filmsReducer } from './reducers/films/films';
+import { userReducer } from './reducers/user/user';
+import { filmReducer } from './reducers/film/film';
+import { commentsReducer } from './reducers/comments/comments';
+import { similarReducer } from './reducers/similar/similar';
+import { favoriteReducer } from './reducers/favorite/favorite';
 
 export const store = configureStore({
   reducer: {

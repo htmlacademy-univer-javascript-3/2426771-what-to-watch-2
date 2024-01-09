@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFavorite } from '../../store/reducers/favorite';
+import { getFavorite } from '../../store/reducers/favorite/favorite';
 import { Film } from '../../types/film';
 import { APIRoute } from '../../config/api/routes';
 import { api } from '../../config/api/api';
-import { filmLoaded } from '../../store/reducers/film';
+import { filmLoaded } from '../../store/reducers/film/film';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { fetchFavorite } from '../../store/api-actions';
-import { getAuthStatus } from '../../store/reducers/user-reducer';
+import { getAuthStatus } from '../../store/reducers/user/user';
 import { AuthorizationStatus } from '../../types/authorization';
 import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from '../../config/route';
@@ -23,7 +23,9 @@ export const MyListButton: FC<Props> = ({ film }) => {
   const navigate = useNavigate();
 
   const changeStatus = async (status: 1 | 0) => {
-    const {data} = await api.post<Film>(`${APIRoute.Favorite}/${film.id}/${status}`);
+    const { data } = await api.post<Film>(
+      `${APIRoute.Favorite}/${film.id}/${status}`
+    );
     dispatch(filmLoaded(data));
     dispatch(fetchFavorite());
   };
@@ -46,7 +48,9 @@ export const MyListButton: FC<Props> = ({ film }) => {
         <use xlinkHref={film.isFavorite ? '#in-list' : '#add'}></use>
       </svg>
       <span>My list</span>
-      {favorite.length > 0 ? <span className="film-card__count">{favorite.length}</span> : null}
+      {favorite.length > 0 ? (
+        <span className="film-card__count">{favorite.length}</span>
+      ) : null}
     </button>
   );
 };

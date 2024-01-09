@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { RoutePaths, getRoutePath } from '../../config/route';
 import Header from '../../components/header/header';
 import FilmTabsMenu from '../../components/film-tabs-menu/film-tabs-menu';
@@ -8,12 +8,12 @@ import FilmTabs from '../../components/film-tabs/film-tabs';
 import { FilmTabs as FilmTabsType } from '../../types/film-tab/';
 import { fetchFilm, fetchSimilar } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFilm, getFilmLoadingStatus } from '../../store/reducers/film';
+import { getFilm, getFilmLoadingStatus } from '../../store/reducers/film/film';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { getSimilar } from '../../store/reducers/similar';
+import { getSimilar } from '../../store/reducers/similar/similar';
 import FilmList from '../../components/film-list/film-list';
 import { LoadingStatus } from '../../types/loading/loading';
-import { getAuthStatus } from '../../store/reducers/user-reducer';
+import { getAuthStatus } from '../../store/reducers/user/user';
 import { AuthorizationStatus } from '../../types/authorization';
 import { PlayButton } from '../../components/play-button/play-button';
 import { MyListButton } from '../../components/my-list-button/my-list-button';
@@ -43,12 +43,15 @@ const FilmPage: FC = () => {
   }, [id, navigate]);
 
   if (!hash) {
-    return <Navigate to={`#${FilmTabsType.Overview}`}/>;
+    return <Navigate to={`#${FilmTabsType.Overview}`} />;
   }
 
   return (
     <div>
-      <section className="film-card film-card--full" style={{backgroundColor: film?.backgroundColor}}>
+      <section
+        className="film-card film-card--full"
+        style={{ backgroundColor: film?.backgroundColor }}
+      >
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film?.posterImage} alt={film?.name} />
@@ -67,8 +70,8 @@ const FilmPage: FC = () => {
               </p>
 
               <div className="film-card__buttons">
-                <PlayButton id={id || ''}/>
-                {film && <MyListButton film={film}/>}
+                <PlayButton id={id || ''} />
+                {film && <MyListButton film={film} />}
                 {authStatus === AuthorizationStatus.Auth && (
                   <Link
                     to={getRoutePath(RoutePaths.AddReview, { id: id || '' })}
