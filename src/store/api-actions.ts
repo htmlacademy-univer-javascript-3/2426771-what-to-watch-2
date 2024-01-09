@@ -1,16 +1,16 @@
 import { APIRoute } from './../config/api/routes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, FilmCard, Comment } from '../types/film';
-import { filmsLoaded } from './reducers/films';
+import { filmsLoaded } from './reducers/films/films';
 import { ThunkApiConfig } from './types';
 import { AuthorizationError, AuthorizationRequest, AuthorizationResponse } from '../types/authorization';
-import { authFailed, signedIn, signedOut } from './reducers/user-reducer';
+import { authFailed, signedIn, signedOut } from './reducers/user/user';
 import { AxiosError } from 'axios';
 import { lsApi } from '../config/ls-api/ls-api';
-import { filmLoaded } from './reducers/film';
-import { commentsLoaded } from './reducers/comments';
-import { similarLoaded } from './reducers/similar';
-import { favoriteLoaded } from './reducers/favorite';
+import { filmLoaded, filmNotLoaded } from './reducers/film/film';
+import { commentsLoaded } from './reducers/comments/comments';
+import { similarLoaded } from './reducers/similar/similar';
+import { favoriteLoaded } from './reducers/favorite/favorite';
 
 export const fetchFilms = createAsyncThunk<void, undefined, ThunkApiConfig>('films/fetchFilms',
   async (_, {dispatch, extra: api}) => {
@@ -22,10 +22,10 @@ export const fetchFilms = createAsyncThunk<void, undefined, ThunkApiConfig>('fil
 export const fetchFilm = createAsyncThunk<void, string, ThunkApiConfig>('film/fetchFilm',
   async (id: string, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film>(`${APIRoute.Films }/${id}`);
+      const {data} = await api.get<Film>(`${APIRoute.Films}/${id}`);
       dispatch(filmLoaded(data));
     } catch (e) {
-      dispatch(filmLoaded(null));
+      dispatch(filmNotLoaded());
     }
   }
 );
@@ -36,7 +36,7 @@ export const fetchPromoFilm = createAsyncThunk<void, undefined, ThunkApiConfig>(
       const {data} = await api.get<Film>(APIRoute.Promo);
       dispatch(filmLoaded(data));
     } catch (e) {
-      dispatch(filmLoaded(null));
+      dispatch(filmNotLoaded());
     }
   }
 );

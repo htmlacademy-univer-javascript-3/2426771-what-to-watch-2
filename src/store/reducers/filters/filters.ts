@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { RootState } from '../..';
 
 export interface FiltersState {
   genre: string;
 }
 
-const initialState: FiltersState = {
+export const initialState: FiltersState = {
   genre: '',
 };
 

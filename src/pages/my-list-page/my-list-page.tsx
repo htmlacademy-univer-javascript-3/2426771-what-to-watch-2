@@ -1,8 +1,8 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFavorite } from '../../store/reducers/favorite';
+import { getFavorite } from '../../store/reducers/favorite/favorite';
 
 const MyListPage: FC = () => {
   const favorite = useAppSelector(getFavorite);
@@ -10,7 +10,9 @@ const MyListPage: FC = () => {
   return (
     <div className="user-page">
       <Header>
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">
+          My list <span className="user-page__film-count">9</span>
+        </h1>
       </Header>
 
       <section className="catalog">

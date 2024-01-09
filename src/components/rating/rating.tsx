@@ -2,7 +2,7 @@ import React from 'react';
 import {FC} from 'react';
 
 interface RatingProps {
-  setRating: React.Dispatch<React.SetStateAction<number>>;
+  setRating: (value: number) => void;
 }
 
 const ratingStars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].reverse();

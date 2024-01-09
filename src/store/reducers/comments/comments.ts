@@ -1,14 +1,14 @@
-import { Comment } from '../../types/film/index';
-import { LoadingStatus } from '../../types/loading/loading';
+import { Comment } from '../../../types/film/index';
+import { LoadingStatus } from '../../../types/loading/loading';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { RootState } from '../..';
 
 export interface CommentsState {
   comments: Comment[];
   loadingStatus: LoadingStatus;
 }
 
-const initialState: CommentsState = {
+export const initialState: CommentsState = {
   comments: [],
   loadingStatus: LoadingStatus.Unknown
 };

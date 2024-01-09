@@ -1,14 +1,14 @@
-import { Film } from './../../types/film/index';
-import { LoadingStatus } from '../../types/loading/loading';
+import { Film } from '../../../types/film/index';
+import { LoadingStatus } from '../../../types/loading/loading';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { RootState } from '../..';
 
 export interface FilmState {
   film: Film | null;
   loadingStatus: LoadingStatus;
 }
 
-const initialState: FilmState = {
+export const initialState: FilmState = {
   film: null,
   loadingStatus: LoadingStatus.Unknown
 };
@@ -26,11 +26,15 @@ export const filmSlice = createSlice({
     filmLoaded: (state, action: PayloadAction<Film | null>) => {
       state.film = action.payload;
       state.loadingStatus = LoadingStatus.Loaded;
+    },
+    filmNotLoaded: (state) => {
+      state.film = null;
+      state.loadingStatus = LoadingStatus.Loaded;
     }
   }
 });
 
-export const { filmRequested, filmRequestFailed, filmLoaded } = filmSlice.actions;
+export const { filmRequested, filmRequestFailed, filmLoaded, filmNotLoaded } = filmSlice.actions;
 
 export const getFilm = (state: RootState) => state.film.film;
 export const getFilmLoadingStatus = (state: RootState) => state.film.loadingStatus;

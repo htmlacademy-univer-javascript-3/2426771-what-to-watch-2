@@ -1,14 +1,14 @@
-import { FilmCard } from '../../types/film/index';
-import { LoadingStatus } from '../../types/loading/loading';
+import { FilmCard } from '../../../types/film/index';
+import { LoadingStatus } from '../../../types/loading/loading';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { RootState } from '../..';
 
 export interface SimilarState {
   similar: FilmCard[];
   loadingStatus: LoadingStatus;
 }
 
-const initialState: SimilarState = {
+export const initialState: SimilarState = {
   similar: [],
   loadingStatus: LoadingStatus.Unknown
 };
