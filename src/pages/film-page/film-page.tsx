@@ -48,7 +48,7 @@ const FilmPage: FC = () => {
   }, [id, navigate]);
 
   if (filmLoadingStatus !== LoadingStatus.Loaded) {
-    return 'спиннер';
+    return (<div>спиннер</div>);
   }
 
   if (!hash) {
