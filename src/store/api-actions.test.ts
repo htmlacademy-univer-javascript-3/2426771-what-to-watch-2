@@ -305,7 +305,7 @@ describe('Async actions', () => {
 
   describe('logout', () => {
     it('should dispatch "logout.pending", "signedOut" and "logout.fulfilled" with thunk "logout', async () => {
-      localStorage.setItem('userToken', 'token');
+      localStorage.setItem('wtw-token', 'token');
       mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
       await store.dispatch(logout());
 
@@ -321,7 +321,7 @@ describe('Async actions', () => {
 
   describe('checkLogin', () => {
     it('should dispatch "checkLogin.pending", "signedIn" and "checkLogin.fulfilled" with thunk "checkLogin', async () => {
-      localStorage.setItem('userToken', 'token');
+      localStorage.setItem('wtw-token', 'token');
       mockAxiosAdapter.onGet(APIRoute.Login).reply(200, {
         'name': 'Oliver.conner',
         'avatarUrl': 'https://url-to-image/image.jpg',

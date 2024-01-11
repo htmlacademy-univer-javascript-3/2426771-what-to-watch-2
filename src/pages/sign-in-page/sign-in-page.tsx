@@ -6,6 +6,8 @@ import { login } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getAuthError, getAuthStatus } from '../../store/reducers/user/user';
 import { AuthorizationStatus } from '../../types/authorization';
+import { validateEmail } from '../../utils/validate-email';
+import { validatePassword } from '../../utils/validate-password';
 
 const SignInPage: FC = () => {
   const authStatus = useAppSelector(getAuthStatus);
@@ -24,7 +26,9 @@ const SignInPage: FC = () => {
   const errors = error?.details.map((d) => d.property) ?? [];
 
   const handleOnSubmit = () => {
-    dispatch(login({ email, password }));
+    if (validateEmail(email) && validatePassword(password)) {
+      dispatch(login({ email, password }));
+    }
   };
 
   return (
