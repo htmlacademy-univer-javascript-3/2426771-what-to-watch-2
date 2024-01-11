@@ -1,14 +1,14 @@
 class LSApi {
   saveToken (token: string | null): void {
     if (token) {
-      localStorage.setItem('userToken', token);
+      localStorage.setItem('wtw-token', token);
     } else {
-      localStorage.removeItem('userToken');
+      localStorage.removeItem('wtw-token');
     }
   }
 
   readToken (): string | null {
-    return localStorage.getItem('userToken');
+    return localStorage.getItem('wtw-token');
   }
 }
 

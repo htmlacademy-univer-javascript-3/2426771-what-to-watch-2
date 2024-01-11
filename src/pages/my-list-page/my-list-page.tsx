@@ -1,11 +1,23 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getFavorite } from '../../store/reducers/favorite/favorite';
+import { getAuthStatus } from '../../store/reducers/user/user';
+import { AuthorizationStatus } from '../../types/authorization';
+import { useNavigate } from 'react-router-dom';
+import { RoutePaths } from '../../config/route';
 
 const MyListPage: FC = () => {
   const favorite = useAppSelector(getFavorite);
+  const authStatus = useAppSelector(getAuthStatus);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authStatus === AuthorizationStatus.NoAuth) {
+      navigate(RoutePaths.SignIn);
+    }
+  }, [authStatus]);
 
   return (
     <div className="user-page">
