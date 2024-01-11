@@ -26,12 +26,16 @@ const AddReviewPage: FC = () => {
   }
 
   useEffect(() => {
-    if (!id || authStatus !== AuthorizationStatus.Auth) {
-      return navigate(RoutePaths.Page404);
+    if (authStatus === AuthorizationStatus.NoAuth) {
+      return navigate(RoutePaths.SignIn);
     }
+  }, [authStatus]);
 
-    dispatch(fetchFilm(id));
-  }, [id, navigate, authStatus]);
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilm(id));
+    }
+  }, [id]);
 
   return (
     <section
