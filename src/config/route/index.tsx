@@ -6,7 +6,6 @@ import FilmPage from '../../pages/film-page/film-page';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import LoginOnlyRoute from '../../components/login-only-route/login-only-route';
 
 export enum RoutePaths {
   Main = '/',
@@ -39,9 +38,7 @@ export const getRouteConfig = (): Record<RoutePaths, RouteProps> => ({
   },
   [RoutePaths.MyList]: {
     element: (
-      <LoginOnlyRoute>
-        <MyListPage />
-      </LoginOnlyRoute>
+      <MyListPage />
     )
   },
   [RoutePaths.Film]: {
